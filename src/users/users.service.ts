@@ -1,35 +1,35 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { RolesService } from 'src/roles/roles.service';
 
+import { RolesService } from '../roles/roles.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.model';
+
 
 @Injectable()
 export class UsersService {
 
-    constructor(
-        @InjectModel(User) private userRepository: typeof User,
-        private rolesService: RolesService
-    ) {
-
-    }
+    constructor(@InjectModel(User) private userRepository: typeof User,
+        private roleService: RolesService) { }
 
     async createUser(dto: CreateUserDto) {
-        const user = await this.userRepository.create(dto)
-        const role = await this.rolesService.get('USER')
+        const user = await this.userRepository.create(dto);
+        const role = await this.roleService.get("ADMIN")
         await user.$set('Roles', [role.id])
         user.Roles = [role]
-        return { user, Roles: [role]}
+        return user;
     }
 
-    async getAllUser() {
-        const users = await this.userRepository.findAll({ include: { all: true } })
-        return users
+    async getAllUsers() {
+        const users = await this.userRepository.findAll({ include: { all: true } });
+        return users;
     }
 
-
-    async deleteUser(id: number) {
-        return await this.userRepository.destroy({ where: { id } })
+    async getUserByEmail(email: string) {
+        const user = await this.userRepository.findOne({ where: { email }, include: { all: true } })
+        return user;
     }
+
+  
+
 }

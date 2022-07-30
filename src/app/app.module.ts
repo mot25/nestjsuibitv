@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { AuthModule } from 'src/auth/auth.module';
 import { Role } from 'src/roles/roles.model';
 import { RolesModule } from 'src/roles/roles.module';
 import { UserRoles } from 'src/roles/User-Role.model';
@@ -26,6 +27,7 @@ import { UsersModule } from 'src/users/users.module';
       ],
       autoLoadModels: true
     }),
+    AuthModule,
     UsersModule,
     RolesModule
    

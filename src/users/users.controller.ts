@@ -23,17 +23,20 @@ export class UsersController {
     }
 
 
+    @Get('userByEmail/:email')
+    getByEmail(@Param('email') email: string) {
+       return this.UsersService.getUserByEmail(email)
+    }
+
+
     @ApiOperation({ summary: 'summary getAll user' })
     @ApiResponse({ status: 200, type: [User] })
     @Get()
     getAll() {
-        const users = this.UsersService.getAllUser()
+        const users = this.UsersService.getAllUsers()
         return users
     }
 
 
-    @Delete(':id')
-    deleteById(@Param('id') id: number) {
-        return this.UsersService.deleteUser(id)
-    }
+ 
 }

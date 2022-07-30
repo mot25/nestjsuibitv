@@ -17,8 +17,11 @@ import { UsersService } from './users.service';
       User,
       Role,
       UserRoles
-    ]), 
+    ]),
     RolesModule
+  ],
+  exports: [
+    UsersService
   ]
 })
 export class UsersModule { }
