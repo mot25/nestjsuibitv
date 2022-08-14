@@ -1,6 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 
+import { BannedUsersDto } from './dto/bannedUsers.dto';
 import { CreateRoleDto } from './dto/create-role.dto';
+import { GetRoleDto } from './dto/getRole.dto';
 import { RolesService } from './roles.service';
 
 @Controller('roles')
@@ -35,4 +37,5 @@ export class RolesController {
     createRoles(@Body() data: CreateRoleDto) {
         return this.roleService.create(data)
     }
+
 }

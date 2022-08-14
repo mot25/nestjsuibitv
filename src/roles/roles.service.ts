@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 
+import { BannedUsersDto } from './dto/bannedUsers.dto';
 import { CreateRoleDto } from './dto/create-role.dto';
+import { GetRoleDto } from './dto/getRole.dto';
 import { Role } from './roles.model';
 
 @Injectable()
@@ -28,5 +30,7 @@ export class RolesService {
         return await this.rolesReposetory.findOne({ where: { value } })
     }
 
+
+    
 
 }
